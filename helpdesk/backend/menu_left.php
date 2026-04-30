@@ -42,6 +42,16 @@
       </li>
       <?php endif; ?>
 
+      <?php if($_SESSION['level_id'] == '01' || $_SESSION['level_id'] == '02' || $_SESSION['level_id'] == '04'): ?>
+      <!-- ระบบทะเบียนอุปกรณ์ -->
+      <li>
+        <a href="list_equipment_registry.php">
+          <i class="fa fa-database"></i>
+          <span>ระบบทะเบียนอุปกรณ์</span>
+        </a>
+      </li>
+      <?php endif; ?>
+
       <?php if($_SESSION['level_id'] == '01'): ?>
       <!-- ตั้งค่าระบบ -->
       <li class="header">ตั้งค่าระบบ</li>
