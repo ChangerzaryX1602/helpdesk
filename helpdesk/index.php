@@ -62,17 +62,24 @@
       }
 
       .brand-icon-wrap {
-        width: 96px; height: 96px;
-        background: rgba(255,255,255,0.14);
+        width: 116px; height: 116px;
+        background: #fff;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 26px;
-        border: 2px solid rgba(255,255,255,0.22);
+        border: 3px solid rgba(255,255,255,0.35);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
         position: relative; z-index: 1;
+        overflow: hidden;
       }
       .brand-icon-wrap .fa { font-size: 44px; color: #fff; }
+      .brand-icon-wrap img {
+        width: 100%; height: 100%;
+        object-fit: contain;
+        padding: 6px;
+      }
 
       .brand-title {
         color: #fff;
@@ -253,7 +260,7 @@
       <!-- Left Brand Panel -->
       <div class="login-brand">
         <div class="brand-icon-wrap">
-          <i class="fa fa-wrench"></i>
+          <img src="img-frontend/icon.webp" alt="โลโก้หน่วยงาน">
         </div>
         <div class="brand-title">ระบบแจ้งซ่อมออนไลน์<br>Maintenance Request</div>
         <div class="brand-subtitle">
