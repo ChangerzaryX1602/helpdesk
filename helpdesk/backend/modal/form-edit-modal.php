@@ -121,7 +121,7 @@
 			<select name="technician_id" class="form-control" required="" style="background-color:#1d1d2c; color:#FFF;">
 				<option value="">เลือกผู้ดำเนินการซ่อม</option>
 				<?php
-					$sql2 = "SELECT * FROM tb_user WHERE level_id IN ('01','02') AND u_status = '1' ORDER BY u_fname ASC";
+					$sql2 = "SELECT * FROM tb_user WHERE level_id = '04' AND u_status = '1' ORDER BY u_fname ASC";
 					$query2 = mysqli_query($conn, $sql2);
 					while($row2 = mysqli_fetch_array($query2)) {
 				?>
