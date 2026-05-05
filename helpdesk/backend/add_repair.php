@@ -60,8 +60,8 @@ include('type_user.php');
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label>หมายเลขเครื่อง</label>
-                      <input type="text" name="r_serialnumber" class="form-control" required>
+                      <label>หมายเลขเครื่อง <span class="text-danger">*</span></label>
+                      <input type="text" name="r_serialnumber" class="form-control" required pattern=".*\S+.*" title="กรุณากรอกหมายเลขเครื่อง">
                     </div>
                   </div>
                 </div>
