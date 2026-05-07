@@ -303,6 +303,10 @@
 
         </form>
 
+        <div class="form-footer" style="margin-top:14px;">
+          <a href="forgot_password.php"><i class="fa fa-key" style="margin-right:4px;"></i> ลืมรหัสผ่าน?</a>
+        </div>
+
         <div class="form-footer">
           ยังไม่มีบัญชี? <a href="register.php">ลงทะเบียนที่นี่</a>
         </div>

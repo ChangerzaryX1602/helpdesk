@@ -55,6 +55,7 @@
                                             <th width="14%">ผู้ใช้งาน</th>
                                             <th width="12%">หน่วยงาน</th>
                                             <th width="10%">IP Address</th>
+                                            <th width="6%" class="text-center">QR Code</th>
                                             <th width="6%" class="text-center">แก้ไข</th>
                                             <th width="6%" class="text-center">ลบ</th>
                                         </tr>
@@ -74,6 +75,9 @@
                                             <td><?php echo htmlspecialchars($rows['reg_user_name']);?></td>
                                             <td><?php echo htmlspecialchars($rows['dep_name']);?></td>
                                             <td><?php echo htmlspecialchars($rows['reg_ip']);?></td>
+                                            <td align="center">
+                                            	<a href="print_qrcode.php?id=<?php echo $rows['reg_id'];?>" target="_blank" class="btn btn-info btn-sm btn-icon" title="พิมพ์ QR Code"><i class="fa fa-qrcode"></i></a>
+                                            </td>
                                             <td align="center">
                                             	<a href="edit_equipment_registry.php?id=<?php echo $rows['reg_id'];?>" class="btn btn-success btn-sm btn-icon" title="แก้ไข"><i class="fa fa-edit"></i></a>
                                             </td>
