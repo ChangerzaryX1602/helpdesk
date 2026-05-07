@@ -35,7 +35,7 @@
     <title><?php echo $title; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="backend/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="backend/bower_components/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

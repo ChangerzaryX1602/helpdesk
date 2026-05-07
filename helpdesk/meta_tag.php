@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300&amp;subset=thai" rel="stylesheet">
-    <link rel="stylesheet" href="backend/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="backend/bower_components/font-awesome/css/font-awesome.min.css">
     <style type="text/css">
 		body{
 			font-size: 14px;
