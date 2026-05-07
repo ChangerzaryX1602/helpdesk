@@ -18,7 +18,8 @@ include('../../config/connect.php');
 $dep_id          = (int) $_POST['dep_id'];
 $eq_id           = (int) $_POST['eq_id'];
 $brand_model     = mysqli_real_escape_string($conn, trim($_POST['reg_brand_model']));
-$asset_no        = mysqli_real_escape_string($conn, trim($_POST['reg_asset_no']));
+$com_num1        = mysqli_real_escape_string($conn, trim($_POST['com_num1']));
+$com_num2        = mysqli_real_escape_string($conn, trim($_POST['com_num2']));
 $computer_name   = mysqli_real_escape_string($conn, trim($_POST['reg_computer_name']));
 $user_name       = mysqli_real_escape_string($conn, trim($_POST['reg_user_name']));
 $cpu             = mysqli_real_escape_string($conn, trim($_POST['reg_cpu']));
@@ -33,12 +34,14 @@ $peripherals     = mysqli_real_escape_string($conn, trim($_POST['reg_peripherals
 $switch_port     = mysqli_real_escape_string($conn, trim($_POST['reg_switch_port']));
 $reg_save        = date('Y-m-d H:i:s');
 
+$com_num2_val = ($com_num2 === '') ? "NULL" : "'$com_num2'";
+
 $sql = "INSERT INTO tb_equipment_registry (
-			dep_id, eq_id, reg_brand_model, reg_asset_no, reg_computer_name,
+			dep_id, eq_id, reg_brand_model, com_num1, com_num2, reg_computer_name,
 			reg_user_name, reg_cpu, reg_ram, reg_harddisk, reg_monitor, reg_os,
 			reg_ip, reg_subnet, reg_gateway, reg_peripherals, reg_switch_port, reg_save
 		) VALUES (
-			$dep_id, $eq_id, '$brand_model', '$asset_no', '$computer_name',
+			$dep_id, $eq_id, '$brand_model', '$com_num1', $com_num2_val, '$computer_name',
 			'$user_name', '$cpu', '$ram', '$harddisk', '$monitor', '$os',
 			'$ip', '$subnet', '$gateway', '$peripherals', '$switch_port', '$reg_save'
 		)";

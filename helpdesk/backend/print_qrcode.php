@@ -17,7 +17,14 @@ if (!$rows) {
     exit();
 }
 
-$device_id = htmlspecialchars($rows['reg_asset_no']);
+$com1 = trim((string)$rows['com_num1']);
+$com2 = trim((string)$rows['com_num2']);
+if ($com1 !== '' && $com2 !== '') {
+    $asset_display = $com1 . '-' . $com2;
+} else {
+    $asset_display = ($com1 !== '') ? $com1 : $com2;
+}
+$device_id = htmlspecialchars($asset_display);
 $device_ip = htmlspecialchars($rows['reg_ip']);
 ?>
 <!DOCTYPE html>

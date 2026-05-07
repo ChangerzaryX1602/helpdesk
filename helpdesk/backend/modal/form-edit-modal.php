@@ -242,11 +242,25 @@
       <div class="modal-body">
           <div class="form-group">
             <label style="color:#000;"><b>รหัสผ่านใหม่</b></label>
-            <input type="password" name="u_password1" class="form-control" required="" maxlength="50">
+            <div class="input-group">
+              <input type="password" name="u_password1" class="form-control" required="" maxlength="50">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" onclick="togglePasswordSibling(this)" title="แสดง/ซ่อนรหัสผ่าน">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </span>
+            </div>
           </div>
           <div class="form-group">
             <label style="color:#000;"><b>ยืนยันรหัสผ่านใหม่อีกครั้ง</b></label>
-            <input type="password" name="u_password2" class="form-control" required="" maxlength="50">
+            <div class="input-group">
+              <input type="password" name="u_password2" class="form-control" required="" maxlength="50">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" onclick="togglePasswordSibling(this)" title="แสดง/ซ่อนรหัสผ่าน">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </span>
+            </div>
           </div>
       </div>
       <div class="modal-footer">
@@ -258,3 +272,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  if (typeof window.togglePasswordSibling !== 'function') {
+    window.togglePasswordSibling = function(btn) {
+      var input = btn.closest('.input-group').querySelector('input');
+      var icon  = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fa fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fa fa-eye';
+      }
+    };
+  }
+</script>

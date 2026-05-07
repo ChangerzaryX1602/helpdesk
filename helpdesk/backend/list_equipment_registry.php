@@ -36,15 +36,19 @@
     <section class="content">
 <div class="row">
 		<div class="col-md-12">
-			<div style="margin-bottom:14px;">
+			<div style="margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
 				<a href="add_equipment_registry.php" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> เพิ่มทะเบียนอุปกรณ์</a>
+				<div style="display:flex;align-items:center;gap:6px;margin-left:auto;">
+					<label for="search_com_num1" style="margin:0;font-weight:500;">ค้นหาด้วยเลขครุภัณฑ์ (com_num1) :</label>
+					<input type="text" id="search_com_num1" class="form-control input-sm" style="width:220px;" placeholder="พิมพ์ com_num1 เพื่อค้นหา">
+				</div>
 			</div>
           <div class="box">
             <div class="box-header text-center bg-blue">
               <h3 class="box-title"><i class="fa fa-database" style="margin-right:7px;"></i>ระบบทะเบียนอุปกรณ์</h3>
             </div>
             <div class="box-body">
-                                <table id="example" width="100%" class="table table-hover">
+                                <table id="table1" width="100%" class="table table-hover">
                                 	<thead>
                                     	<tr class="bg-gray">
                                         	<th width="5%" class="text-center">ลำดับ</th>
@@ -65,10 +69,17 @@
                                     <?php
 										$i = 1;
 										while($rows = mysqli_fetch_array($query)) {
+											$com1 = trim((string)$rows['com_num1']);
+											$com2 = trim((string)$rows['com_num2']);
+											if ($com1 !== '' && $com2 !== '') {
+												$asset_display = $com1 . '-' . $com2;
+											} else {
+												$asset_display = ($com1 !== '') ? $com1 : $com2;
+											}
 									?>
-                                    	<tr>
+                                    	<tr data-com1="<?php echo htmlspecialchars($com1);?>">
                                         	<td align="center"><?php echo $i;?></td>
-                                            <td><?php echo htmlspecialchars($rows['reg_asset_no']);?></td>
+                                            <td><?php echo htmlspecialchars($asset_display);?></td>
                                             <td><?php echo htmlspecialchars($rows['eq_name']);?></td>
                                             <td><?php echo htmlspecialchars($rows['reg_brand_model']);?></td>
                                             <td><?php echo htmlspecialchars($rows['reg_computer_name']);?></td>
@@ -95,7 +106,7 @@
                                                         <h4 class="modal-title"><i class="fa fa-trash"></i> ยืนยันการลบ</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>ต้องการลบทะเบียนอุปกรณ์ <strong><?php echo htmlspecialchars($rows['reg_asset_no']);?></strong> (<?php echo htmlspecialchars($rows['reg_brand_model']);?>) ใช่หรือไม่?</p>
+                                                        <p>ต้องการลบทะเบียนอุปกรณ์ <strong><?php echo htmlspecialchars($asset_display);?></strong> (<?php echo htmlspecialchars($rows['reg_brand_model']);?>) ใช่หรือไม่?</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
@@ -119,6 +130,24 @@
 </div>
 
 	<?php include('import_script.php');?>
+	<script>
+	$(function () {
+		var dt = $('#table1').DataTable();
+
+		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+			if (settings.nTable.id !== 'table1') return true;
+			var keyword = ($('#search_com_num1').val() || '').trim().toLowerCase();
+			if (keyword === '') return true;
+			var row = settings.aoData[dataIndex].nTr;
+			var com1 = (row.getAttribute('data-com1') || '').toLowerCase();
+			return com1.indexOf(keyword) !== -1;
+		});
+
+		$('#search_com_num1').on('keyup change', function () {
+			dt.draw();
+		});
+	});
+	</script>
 </body>
 </html>
 <?php

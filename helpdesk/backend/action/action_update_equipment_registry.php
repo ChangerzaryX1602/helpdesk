@@ -19,7 +19,8 @@ $reg_id          = (int) $_POST['reg_id'];
 $dep_id          = (int) $_POST['dep_id'];
 $eq_id           = (int) $_POST['eq_id'];
 $brand_model     = mysqli_real_escape_string($conn, trim($_POST['reg_brand_model']));
-$asset_no        = mysqli_real_escape_string($conn, trim($_POST['reg_asset_no']));
+$com_num1        = mysqli_real_escape_string($conn, trim($_POST['com_num1']));
+$com_num2        = mysqli_real_escape_string($conn, trim($_POST['com_num2']));
 $computer_name   = mysqli_real_escape_string($conn, trim($_POST['reg_computer_name']));
 $user_name       = mysqli_real_escape_string($conn, trim($_POST['reg_user_name']));
 $cpu             = mysqli_real_escape_string($conn, trim($_POST['reg_cpu']));
@@ -33,11 +34,14 @@ $gateway         = mysqli_real_escape_string($conn, trim($_POST['reg_gateway']))
 $peripherals     = mysqli_real_escape_string($conn, trim($_POST['reg_peripherals']));
 $switch_port     = mysqli_real_escape_string($conn, trim($_POST['reg_switch_port']));
 
+$com_num2_val = ($com_num2 === '') ? "NULL" : "'$com_num2'";
+
 $sql = "UPDATE tb_equipment_registry SET
 			dep_id = $dep_id,
 			eq_id = $eq_id,
 			reg_brand_model = '$brand_model',
-			reg_asset_no = '$asset_no',
+			com_num1 = '$com_num1',
+			com_num2 = $com_num2_val,
 			reg_computer_name = '$computer_name',
 			reg_user_name = '$user_name',
 			reg_cpu = '$cpu',

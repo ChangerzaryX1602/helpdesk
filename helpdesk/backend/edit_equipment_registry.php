@@ -94,7 +94,11 @@ if (!$rows) {
                   <div class="col-md-6 pl-md-1">
                     <div class="form-group">
                       <label>เลขครุภัณฑ์</label>
-                      <input type="text" name="reg_asset_no" class="form-control" value="<?php echo htmlspecialchars($rows['reg_asset_no']); ?>" required>
+                      <div style="display:flex;align-items:center;gap:6px;">
+                        <input type="text" name="com_num1" class="form-control" maxlength="50" placeholder="ส่วนหน้า" value="<?php echo htmlspecialchars($rows['com_num1']); ?>" required>
+                        <span style="font-weight:500;color:#666;">-</span>
+                        <input type="text" name="com_num2" class="form-control" maxlength="20" placeholder="ส่วนหลัง" value="<?php echo htmlspecialchars($rows['com_num2']); ?>" style="max-width:140px;">
+                      </div>
                     </div>
                   </div>
                 </div>

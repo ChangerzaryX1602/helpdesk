@@ -83,6 +83,22 @@
       }
       .field-group input::placeholder { color: #c4cdd6; font-weight: 300; }
 
+      .password-wrap { position: relative; }
+      .password-wrap input { padding-right: 44px; }
+      .eye-toggle {
+        position: absolute;
+        right: 12px; top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #b0bec5;
+        font-size: 15px;
+        background: none; border: none; padding: 4px;
+        transition: color 0.25s;
+        z-index: 2;
+        line-height: 1;
+      }
+      .eye-toggle:hover { color: #00897b; }
+
       .prefix-radio {
         display: flex; flex-wrap: wrap; gap: 10px 22px;
         padding: 8px 2px 0;
@@ -245,7 +261,12 @@
             <div class="col-6">
               <div class="field-group">
                 <label>Password <span class="req">*</span></label>
-                <input type="password" name="u_password" id="u_password" placeholder="รหัสผ่าน" minlength="4" required>
+                <div class="password-wrap">
+                  <input type="password" name="u_password" id="u_password" placeholder="รหัสผ่าน" minlength="4" required>
+                  <button type="button" class="eye-toggle" onclick="togglePassword('u_password', this)" aria-label="แสดง/ซ่อนรหัสผ่าน">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -278,6 +299,18 @@
           return false;
         }
         return true;
+      }
+
+      function togglePassword(id, btn) {
+        var input = document.getElementById(id);
+        var icon  = btn.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.className = 'fa fa-eye-slash';
+        } else {
+          input.type = 'password';
+          icon.className = 'fa fa-eye';
+        }
       }
     </script>
 

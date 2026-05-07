@@ -54,7 +54,14 @@
                                     <div class="col-md-3 pr-md-1">
                                       <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="u_password" class="form-control" required="">
+                                        <div class="input-group">
+                                          <input type="password" name="u_password" id="u_password" class="form-control" required="">
+                                          <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" onclick="togglePassword('u_password', this)" title="แสดง/ซ่อนรหัสผ่าน">
+                                              <i class="fa fa-eye"></i>
+                                            </button>
+                                          </span>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -179,6 +186,19 @@
 <!-- ./wrapper -->
 
 	<?php include('import_script.php');?>
+	<script>
+	  function togglePassword(id, btn) {
+	    var input = document.getElementById(id);
+	    var icon  = btn.querySelector('i');
+	    if (input.type === 'password') {
+	      input.type = 'text';
+	      icon.className = 'fa fa-eye-slash';
+	    } else {
+	      input.type = 'password';
+	      icon.className = 'fa fa-eye';
+	    }
+	  }
+	</script>
 </body>
 </html>
 <?php

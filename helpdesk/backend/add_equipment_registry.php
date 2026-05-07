@@ -83,7 +83,11 @@ if(!in_array($_SESSION['level_id'], array('01','02','04'))) {
                   <div class="col-md-6 pl-md-1">
                     <div class="form-group">
                       <label>เลขครุภัณฑ์</label>
-                      <input type="text" name="reg_asset_no" class="form-control" required>
+                      <div style="display:flex;align-items:center;gap:6px;">
+                        <input type="text" name="com_num1" class="form-control" maxlength="50" placeholder="ส่วนหน้า" required>
+                        <span style="font-weight:500;color:#666;">-</span>
+                        <input type="text" name="com_num2" class="form-control" maxlength="20" placeholder="ส่วนหลัง" style="max-width:140px;">
+                      </div>
                     </div>
                   </div>
                 </div>
