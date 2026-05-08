@@ -41,7 +41,7 @@ if(!in_array($_SESSION['level_id'], array('01','02','04'))) {
                   <div class="col-md-6 pr-md-1">
                     <div class="form-group">
                       <label>หน่วยงาน</label>
-                      <select name="dep_id" class="form-control" required>
+                      <select name="dep_id" id="dep_id" class="form-control" required>
                         <option value="">เลือกหน่วยงาน</option>
                         <?php
                         $depQuery = mysqli_query($conn, "SELECT * FROM tb_department ORDER BY dep_id ASC");
@@ -84,7 +84,7 @@ if(!in_array($_SESSION['level_id'], array('01','02','04'))) {
                     <div class="form-group">
                       <label>เลขครุภัณฑ์</label>
                       <div style="display:flex;align-items:center;gap:6px;">
-                        <input type="text" name="com_num1" class="form-control" maxlength="50" placeholder="ส่วนหน้า" required>
+                        <input type="text" name="com_num1" id="com_num1" class="form-control" maxlength="50" placeholder="ส่วนหน้า" required>
                         <span style="font-weight:500;color:#666;">-</span>
                         <input type="text" name="com_num2" class="form-control" maxlength="20" placeholder="ส่วนหลัง" style="max-width:140px;">
                       </div>
@@ -198,6 +198,21 @@ if(!in_array($_SESSION['level_id'], array('01','02','04'))) {
 </div>
 
 <?php include('import_script.php'); ?>
+<script>
+$(function () {
+    function fetchNextComNum() {
+        var depId = $('#dep_id').val();
+        if (!depId) return;
+        $.getJSON('action/get_next_com_num.php', { dep_id: depId }, function (data) {
+            if (data && data.next) {
+                $('#com_num1').val(data.next);
+            }
+        });
+    }
+    $('#dep_id').on('change', fetchNextComNum);
+    fetchNextComNum();
+});
+</script>
 </body>
 </html>
 <?php mysqli_close($conn); ?>
