@@ -569,7 +569,8 @@ ALTER TABLE `tb_position`
 -- Indexes for table `tb_repair`
 --
 ALTER TABLE `tb_repair`
-  ADD PRIMARY KEY (`no`,`r_no`),
+  ADD PRIMARY KEY (`no`),
+  ADD UNIQUE KEY `uq_tb_repair_r_no` (`r_no`),
   ADD KEY `idx_tb_repair_r_save` (`r_save`),
   ADD KEY `idx_tb_repair_s_id` (`s_id`),
   ADD KEY `idx_tb_repair_u_idcard` (`u_idcard`),

@@ -10,7 +10,8 @@
 	INNER JOIN tb_status AS s ON r.s_id = s.s_id
 	LEFT JOIN tb_user AS uu ON r.technician_id = uu.u_idcard
 	LEFT JOIN tb_user AS uuu ON r.head_id = uuu.u_idcard
-	 WHERE r.technician_id = '".$_SESSION['u_idcard']."' 
+	 WHERE r.technician_id = '".$_SESSION['u_idcard']."'
+	 GROUP BY r.no
 	 ORDER BY r.r_no ASC";
 	$query = mysqli_query($conn, $sql);
 ?>
@@ -54,7 +55,6 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              					<form method="post">
                                 <p style="font-size:10px; color:#F00;">*** หมายเหตุ หากสถานะดำเนินการสำเร็จ ไม่สามารถทำรายการได้อีก</p>
                                 <table id="table1" width="100%" class="table table-hover">
                                 	<thead>
@@ -117,13 +117,18 @@
                                                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#sentRepairModal<?php echo $rows['r_no'];?>"><span class="fa fa-random (alias)"></span></button>
                                                 <?php } ?>
                                             </td>
-                                            <?php include('modal/form-edit-modal.php'); ?>
-                                            
+
                                         </tr>
                                     <?php $i++; } ?>
                                     </tbody>
                                 </table>
-          						</form>
+
+                                <?php
+                                    mysqli_data_seek($query, 0);
+                                    while ($rows = mysqli_fetch_array($query)) {
+                                        include('modal/form-edit-modal.php');
+                                    }
+                                ?>
 
                                 <?php include('action/edit_function.php'); ?>
             </div>

@@ -28,23 +28,32 @@ $wl_id = isset($_POST['wl_id']) && $_POST['wl_id'] !== '' ? $_POST['wl_id'] : '1
 $s_id = '1';
 $r_save = date('Y-m-d H:i:s');
 
-$sqlcheck = "SELECT MAX(no) + 1 AS gen_no FROM tb_repair";
-$querycheck = mysqli_query($conn, $sqlcheck);
-$numrow = mysqli_fetch_array($querycheck);
-$gen_no = !empty($numrow['gen_no']) ? $numrow['gen_no'] : 1;
-$r_no = 'R' . $gen_no;
 $sla_due_at = repairCalculateSlaDueAt($conn, $eq_id, $wl_id, $r_save);
+$placeholder = 'P' . bin2hex(random_bytes(3));
 
+mysqli_begin_transaction($conn);
 $sql = "INSERT INTO tb_repair(
 			r_no, u_idcard, eq_id, r_name, r_serialnumber, r_detail, symptom_summary,
 			build_id, floor, room, s_id, r_save, sla_due_at, head_id, technician_id, wl_id
 		) VALUES (
-			'$r_no', '$u_idcard', $eq_id, '" . repairEscape($conn, $r_name) . "', '" . repairEscape($conn, $r_serialnumber) . "',
+			'" . repairEscape($conn, $placeholder) . "', '$u_idcard', $eq_id, '" . repairEscape($conn, $r_name) . "', '" . repairEscape($conn, $r_serialnumber) . "',
 			'" . repairEscape($conn, $r_detail) . "', '" . repairEscape($conn, substr($r_detail !== '' ? $r_detail : $r_name, 0, 255)) . "',
 			$build_id, '" . repairEscape($conn, $floor) . "', '" . repairEscape($conn, $room) . "', '$s_id', '$r_save', '$sla_due_at',
 			'', '', '" . repairEscape($conn, $wl_id) . "'
 		)";
 $query = mysqli_query($conn, $sql);
+if ($query) {
+	$newNo = mysqli_insert_id($conn);
+	$r_no = 'R' . $newNo;
+	$query = mysqli_query($conn, "UPDATE tb_repair SET r_no='" . repairEscape($conn, $r_no) . "' WHERE no=" . (int) $newNo);
+	if ($query) {
+		mysqli_commit($conn);
+	} else {
+		mysqli_rollback($conn);
+	}
+} else {
+	mysqli_rollback($conn);
+}
 
 if ($query) {
 	repairInsertComment($conn, $r_no, $u_idcard, 'สร้างรายการแจ้งซ่อมโดยเจ้าหน้าที่: ' . ($r_detail !== '' ? $r_detail : $r_name), 'create');

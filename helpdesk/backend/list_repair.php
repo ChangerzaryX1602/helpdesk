@@ -144,14 +144,21 @@
                                             	<button type="button" class="btn btn-danger btn-sm btn-icon" title="ยกเลิก" data-toggle="modal" data-target="#cancelRepairModal<?php echo $rows['r_no'];?>"><i class="fa fa-times"></i></button>
                                             <?php } ?>
                                             </td>
-                                            <?php include('modal/form-edit-modal.php'); ?>
-                                            <?php include('modal/form-delete-modal.php'); ?> 
-                                            
+
                                         </tr>
                                     <?php $i++; } ?>
                                     </tbody>
                                 </table>
           						</form>
+
+                                <?php
+                                    mysqli_data_seek($query, 0);
+                                    while ($rows = mysqli_fetch_array($query)) {
+                                        include('modal/form-edit-modal.php');
+                                        include('modal/form-delete-modal.php');
+                                    }
+                                ?>
+
                                 <?php include('action/add_function.php'); ?>
                                 <?php include('action/edit_function.php'); ?>
                                 <?php include('action/delete_function.php'); ?>
