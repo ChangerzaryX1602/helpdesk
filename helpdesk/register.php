@@ -283,19 +283,54 @@
     <script src="js/sweetalert.min.js"></script>
     <script>
       function validateRegister() {
+        var prefix = document.querySelector('input[name="u_prefix"]:checked');
+        if (!prefix) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณาเลือกคำนำหน้าชื่อ', 'warning');
+          return false;
+        }
+        var fname = document.querySelector('[name="u_fname"]').value.trim();
+        if (!fname) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณากรอกชื่อจริง', 'warning');
+          return false;
+        }
+        var lname = document.querySelector('[name="u_lname"]').value.trim();
+        if (!lname) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณากรอกนามสกุล', 'warning');
+          return false;
+        }
         var idcard = document.getElementById('u_idcard').value.trim();
         if (!/^\d{13}$/.test(idcard)) {
-          alert('กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก');
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก', 'warning');
+          return false;
+        }
+        var mobile = document.querySelector('[name="u_mobile"]').value.trim();
+        if (!mobile) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณากรอกเบอร์โทรศัพท์มือถือ', 'warning');
+          return false;
+        }
+        var email = document.querySelector('[name="u_email"]').value.trim();
+        if (!email) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณากรอกอีเมล', 'warning');
+          return false;
+        }
+        var depId = document.querySelector('[name="dep_id"]').value;
+        if (!depId) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณาเลือกหน่วยงาน / แผนก', 'warning');
+          return false;
+        }
+        var pId = document.querySelector('[name="p_id"]').value;
+        if (!pId) {
+          swal('โปรดกรอกข้อมูลให้ครบ', 'กรุณาเลือกตำแหน่ง', 'warning');
           return false;
         }
         var username = document.getElementById('u_username').value.trim();
         if (username.length < 3) {
-          alert('Username ต้องมีอย่างน้อย 3 ตัวอักษร');
+          swal('โปรดกรอกข้อมูลให้ครบ', 'Username ต้องมีอย่างน้อย 3 ตัวอักษร', 'warning');
           return false;
         }
         var password = document.getElementById('u_password').value;
         if (password.length < 4) {
-          alert('Password ต้องมีอย่างน้อย 4 ตัวอักษร');
+          swal('โปรดกรอกข้อมูลให้ครบ', 'Password ต้องมีอย่างน้อย 4 ตัวอักษร', 'warning');
           return false;
         }
         return true;
