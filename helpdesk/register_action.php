@@ -15,7 +15,8 @@ $u_fname    = mysqli_real_escape_string($conn, trim($_POST['u_fname']));
 $u_lname    = mysqli_real_escape_string($conn, trim($_POST['u_lname']));
 $u_idcard   = mysqli_real_escape_string($conn, trim($_POST['u_idcard']));
 $u_mobile   = mysqli_real_escape_string($conn, trim($_POST['u_mobile']));
-$u_tel      = mysqli_real_escape_string($conn, trim($_POST['u_tel']));
+$u_tel_raw  = trim($_POST['u_tel']);
+$u_tel      = ($u_tel_raw !== '') ? mysqli_real_escape_string($conn, $u_tel_raw) : null;
 $u_email    = mysqli_real_escape_string($conn, trim($_POST['u_email']));
 $p_id       = (int) $_POST['p_id'];
 $dep_id     = (int) $_POST['dep_id'];
@@ -51,7 +52,7 @@ $sql = "INSERT INTO tb_user (
 			u_prefix, u_fname, u_lname, u_idcard, u_mobile, u_tel, u_email,
 			p_id, dep_id, u_username, u_password, level_id, u_status, u_save
 		) VALUES (
-			'$u_prefix', '$u_fname', '$u_lname', '$u_idcard', '$u_mobile', '$u_tel', '$u_email',
+			'$u_prefix', '$u_fname', '$u_lname', '$u_idcard', '$u_mobile', " . ($u_tel !== null ? "'$u_tel'" : 'NULL') . ", '$u_email',
 			$p_id, $dep_id, '$u_username', '$u_password', '$level_id', '$u_status', '$u_save'
 		)";
 $query = mysqli_query($conn, $sql);
